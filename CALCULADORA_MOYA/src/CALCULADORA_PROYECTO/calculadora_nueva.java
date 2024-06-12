@@ -209,8 +209,10 @@ public class calculadora_nueva {
 			public void actionPerformed(ActionEvent e) {
 				
 				double num1=Double.parseDouble(textField.getText());
+				double num2=Double.parseDouble(textField_1.getText());
 				
-				double raiz= Math.sqrt(num1);
+				
+				double raiz= Math.pow(num1, 1 / num2);
 				
 				lblResult.setText(String.valueOf(raiz));
 			}
