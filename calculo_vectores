@@ -10,6 +10,7 @@ public class calculo_vectores extends JFrame {
     private JTextField textFieldVector2;
     private JTextField textFieldEscalar;
     private JLabel lblResultado;
+    private JTextField textFieldResultado;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -27,7 +28,7 @@ public class calculo_vectores extends JFrame {
     public calculo_vectores() {
     	getContentPane().setBackground(new Color(128, 255, 255));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(0, 0, 700, 500);
+        setBounds(0, 0, 800, 400);
         getContentPane().setLayout(null);
 
         JLabel lblVector1 = new JLabel("Vector 1:");
@@ -49,17 +50,22 @@ public class calculo_vectores extends JFrame {
         textFieldVector2.setColumns(10);
 
         JLabel lblEscalar = new JLabel("Escalar:");
-        lblEscalar.setBounds(10, 129, 86, 14);
+        lblEscalar.setBounds(463, 125, 86, 14);
         getContentPane().add(lblEscalar);
 
         textFieldEscalar = new JTextField();
-        textFieldEscalar.setBounds(106, 126, 86, 20);
+        textFieldEscalar.setBounds(520, 122, 86, 20);
         getContentPane().add(textFieldEscalar);
         textFieldEscalar.setColumns(10);
 
         lblResultado = new JLabel("Resultado:");
-        lblResultado.setBounds(7, 243, 500, 14);
+        lblResultado.setBounds(10, 189, 86, 14);
         getContentPane().add(lblResultado);
+        
+        textFieldResultado = new JTextField();
+        textFieldResultado.setBounds(106, 186, 307, 20);
+        getContentPane().add(textFieldResultado);
+        textFieldResultado.setColumns(10);
 
         JButton btnSuma = new JButton("Suma");
         btnSuma.addActionListener(new ActionListener() {
@@ -68,13 +74,13 @@ public class calculo_vectores extends JFrame {
                     float[] v1 = parseVector(textFieldVector1.getText());
                     float[] v2 = parseVector(textFieldVector2.getText());
                     float[] result = suma(v1, v2);
-                    lblResultado.setText("Resultado: " + vectorToString(result));
+                    textFieldResultado.setText(vectorToString(result));
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
                 }
             }
         });
-        btnSuma.setBounds(7, 176, 89, 23);
+        btnSuma.setBounds(463, 53, 143, 23);
         getContentPane().add(btnSuma);
 
         JButton btnResta = new JButton("Resta");
@@ -84,13 +90,13 @@ public class calculo_vectores extends JFrame {
                     float[] v1 = parseVector(textFieldVector1.getText());
                     float[] v2 = parseVector(textFieldVector2.getText());
                     float[] result = resta(v1, v2);
-                    lblResultado.setText("Resultado: " + vectorToString(result));
+                    textFieldResultado.setText(vectorToString(result));
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
                 }
             }
         });
-        btnResta.setBounds(103, 176, 89, 23);
+        btnResta.setBounds(616, 53, 160, 23);
         getContentPane().add(btnResta);
 
         JButton btnMultiplicacionEscalar = new JButton("Multiplicar Escalar");
@@ -100,13 +106,13 @@ public class calculo_vectores extends JFrame {
                     float[] v1 = parseVector(textFieldVector1.getText());
                     float escalar = Float.parseFloat(textFieldEscalar.getText());
                     float[] result = multiplicacionEscalar(v1, escalar);
-                    lblResultado.setText("Resultado: " + vectorToString(result));
+                    textFieldResultado.setText(vectorToString(result));
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
                 }
             }
         });
-        btnMultiplicacionEscalar.setBounds(204, 176, 150, 23);
+        btnMultiplicacionEscalar.setBounds(616, 121, 160, 23);
         getContentPane().add(btnMultiplicacionEscalar);
 
         JButton btnProductoEscalar = new JButton("Producto Escalar");
@@ -116,13 +122,13 @@ public class calculo_vectores extends JFrame {
                     float[] v1 = parseVector(textFieldVector1.getText());
                     float[] v2 = parseVector(textFieldVector2.getText());
                     float result = productoEscalar(v1, v2);
-                    lblResultado.setText("Resultado: " + result);
+                    textFieldResultado.setText("" + result);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
                 }
             }
         });
-        btnProductoEscalar.setBounds(365, 176, 142, 23);
+        btnProductoEscalar.setBounds(463, 85, 142, 23);
         getContentPane().add(btnProductoEscalar);
 
         JButton btnProductoVectorial = new JButton("Producto Vectorial");
@@ -132,18 +138,23 @@ public class calculo_vectores extends JFrame {
                     float[] v1 = parseVector(textFieldVector1.getText());
                     float[] v2 = parseVector(textFieldVector2.getText());
                     float[] result = productoVectorial(v1, v2);
-                    lblResultado.setText("Resultado: " + vectorToString(result));
+                    textFieldResultado.setText(vectorToString(result));
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
                 }
             }
         });
-        btnProductoVectorial.setBounds(514, 176, 160, 23);
+        btnProductoVectorial.setBounds(616, 85, 160, 23);
         getContentPane().add(btnProductoVectorial);
         
         JLabel lblAviso = new JLabel("Los valores del vector deben estar separados por \",\", ejemplo: 1, 2, 3.");
-        lblAviso.setBounds(10, 11, 442, 23);
+        lblAviso.setBounds(10, 11, 403, 23);
         getContentPane().add(lblAviso);
+        
+        JLabel lblOperaciones = new JLabel("Operaciones");
+        lblOperaciones.setBounds(463, 15, 143, 14);
+        getContentPane().add(lblOperaciones);
+           
     }
 
     private float[] parseVector(String text) {
